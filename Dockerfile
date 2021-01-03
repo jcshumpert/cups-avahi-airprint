@@ -14,6 +14,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 	gutenprint-cups \
 	ghostscript \
 	hplip \
+	net-snmp-libs \
 	avahi \
 	inotify-tools \
 	python3 \
