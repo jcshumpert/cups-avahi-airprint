@@ -47,7 +47,7 @@ In my case:
 docker build -t gmkey/cups-avahi-airprint:latest . 
 ```
 
-### And push your files to dockerhub by executing the 
+### Push your files to dockerhub:
 Now, you can push this image to your hub by executing the docker push command.
 ```
 sudo docker push $DOCKER_ACC/$DOCKER_REPO:$TAG
