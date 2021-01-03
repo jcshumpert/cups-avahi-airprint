@@ -8,13 +8,17 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 	cups-client \
 	cups-filters \
 	cups-dev \
+	gutenprint \
+	gutenprint-libs \
+	gutenprint-doc \
+	gutenprint-cups \
 	ghostscript \
 	hplip \
 	avahi \
 	inotify-tools \
 	python3 \
 	python3-dev \
-	py-pip \
+	py3-pip \
 	build-base \
 	wget \
 	rsync \
