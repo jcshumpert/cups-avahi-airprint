@@ -22,7 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-import cups, os, optparse, re, urllib.parse
+import cups, os, optparse, re
+import urllib.parse as urlparse
 import os.path
 from io import StringIO
 
@@ -43,7 +44,8 @@ except:
             from elementtree import Element, ElementTree, tostring
             etree = None
         except:
-            raise Exception('Failed to find python libxml or elementtree, please install one of those or use python >= 2.5')
+            print('Failed to find python libxml or elementtree, please install one of those or use python >= 2.5')
+            raise
 
 XML_TEMPLATE = """<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
 <service-group>
@@ -120,7 +122,7 @@ class AirPrintGenerate(object):
             conn = cups.Connection(self.host, self.port)
 
         printers = conn.getPrinters()
-
+        
         for p, v in list(printers.items()):
             if v['printer-is-shared']:
                 attrs = conn.getPrinterAttributes(p)
