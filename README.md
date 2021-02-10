@@ -13,7 +13,7 @@ This Alpine-based Docker image runs a CUPS instance with HPLIP drivers that is m
 
 ### Variables
 
-* `CUPSADMIN`: the CUPS admin user you want created - default is CUPSADMIN if unspecified
+* `CUPSADMIN`: the CUPS admin user you want created - default is lowercase cupsadmin if unspecified
 * `CUPSPASSWORD`: the password for the CUPS admin user - default is admin username if unspecified
 
 ### Ports/Network
