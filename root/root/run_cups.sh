@@ -13,9 +13,17 @@ if [ -z "$CUPSPASSWORD" ]; then
 fi
 
 if [ $(grep -ci $CUPSADMIN /etc/shadow) -eq 0 ]; then
-    adduser -S -G lpadmin --no-create-home $CUPSADMIN 
+    # adduser --shell  --no-create-home $CUPSADMIN --group lp
+    useradd -g lpadmin -M  $CUPSADMIN
 fi
 echo $CUPSADMIN:$CUPSPASSWORD | chpasswd
+
+if [ -z "$TIMEZONE" ]; then
+    TIMEZONE="UTC"
+fi
+DEBIAN_FRONTEND=noninteractive
+ln -fs /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
 
 mkdir -p /config/ppd
 mkdir -p /services
