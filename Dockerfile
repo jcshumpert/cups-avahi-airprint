@@ -49,6 +49,10 @@ RUN	apt-get update && \
 	apt-get autoclean && \
 	rm -rf /var/lib/apt/lists/* && \
 	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+	
+RUN cd config && \
+    wget https://github.com/jcshumpert/cups-avahi-airprint/blob/c1760nfw/xerox-phaser-6000-6010_1.0-1_i386.deb &&\
+    apt install ./xerox-phaser-6000-6010_1.0-1_i386.deb
 
 ENV LANG en_US.utf8
 
