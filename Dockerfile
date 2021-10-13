@@ -2,11 +2,15 @@ FROM ubuntu:18.04
 
 # Install the packages we need. Avahi will be included
 ENV DEBIAN_FRONTEND noninteractive
-RUN	apt-get update && \
+RUN	dpkg --add-architecture i386 && \
+	apt-get update && \
 	apt-get install -y locales tzdata && \
 	dpkg-reconfigure --frontend noninteractive tzdata &&\
 	apt-get upgrade -y && \
+	apt-get dist-upgrade && \
 	apt-get install -y \
+	libc6:i386 \
+	libcups2:i386 \
 	cups \
 	hplip \
 	inotify-tools \
@@ -48,10 +52,9 @@ RUN	apt-get update && \
 	apt-get autoremove -y && \
 	apt-get autoclean && \
 	rm -rf /var/lib/apt/lists/* && \
-	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-	
-RUN wget https://github.com/jcshumpert/cups-avahi-airprint/blob/c1760nfw/xerox-phaser-6000-6010_1.0-1_i386.deb &&\
-    apt install ./xerox-phaser-6000-6010_1.0-1_i386.deb
+	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
+	wget https://github.com/jcshumpert/cups-avahi-airprint/raw/c1760nfw/xerox-phaser-6000-6010_1.0-1_i386.deb && \
+	apt install ./xerox-phaser-6000-6010_1.0-1_i386.deb
 
 ENV LANG en_US.utf8
 
@@ -79,5 +82,4 @@ RUN sed -i 's/Listen localhost:631/Listen 0.0.0.0:631/' /etc/cups/cupsd.conf && 
 	echo "ServerAlias *" >> /etc/cups/cupsd.conf && \
 	echo "DefaultEncryption Never" >> /etc/cups/cupsd.conf && \
 	service cups restart
-
 
